@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>金象米大派红包！</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/spin.min.js"></script>
+</head>
+<body>
+	<div class="abc">
+		<div class="abc_load">
+			<div id="foo" style=""></div>
+			<!-- <img src="img/logo1.png"> -->
+		</div>
+	</div>
+	<script>
+		var img_count=0;
+		var opts = {
+            lines: 9, // The number of lines to draw
+            length: 0, // The length of each line
+            width: 10, // The line thickness
+            radius: 15, // The radius of the inner circle
+            corners: 1, // Corner roundness (0..1)
+            rotate: 0, // The rotation offset
+            color: 'orange', // #rgb or #rrggbb
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false, // Whether to render a shadow
+            hwaccel: false, // Whether to use hardware acceleration
+            className: 'spinner', // The CSS class to assign to the spinner
+            zIndex: 2e9, // The z-index (defaults to 2000000000)
+            top: 'auto', // Top position relative to parent in px
+            left: 'auto' // Left position relative to parent in px
+        };
+        var target = document.getElementById('foo');
+        var spinner = new Spinner(opts).spin(target);
+		function loadImage(e) {
+			img_count++;
+			console.log(img_count);
+			if(img_count==16)$('.abc').hide();
+		}
+	</script>
+	<div class="background"><img src="img/bg.jpg" onload="loadImage(this)"></div>
+	<!-- logo -->
+	<div class="logo"><img src="img/logo.png" onload="loadImage(this)"></div>
+	<!-- 第一页 -->
+	<div class="first">
+		<!-- 象 -->
+		<div class="first_ele"><img src="img/first_elephant.png" onload="loadImage(this)"></div>
+		<!-- 按钮 -->
+		<div class="btn btn_s"><img src="img/btn_start.png" onload="loadImage(this)"></div>
+		<div class="btn btn_ru"><img src="img/btn_rules.png" onload="loadImage(this)"></div>
+	</div>
+	<!-- 游戏规则 -->
+	<div class="rules">
+		<div class="mask"></div>
+		<div class="rules_content">游戏的活动规则：<br>&nbsp;&nbsp;&nbsp;&nbsp;在规定的20秒时间内，捉住小金象，屏幕上的小金象不一定都带有现金红包在身上的哦，就看看你是否有运气捉到他了，运气高的朋友，会获得金象米送出的现金红包！玩得越多，就越高机会得奖，把金象米新年有米福气分享给微信好友，邀请他们一齐来玩吧！<br>&nbsp;&nbsp;&nbsp;&nbsp;中奖记录可在“我的得奖记录”页面中查询。<br>&nbsp;&nbsp;&nbsp;&nbsp;所获得的红包金额会在10天后通过微信红包推送给用户，请用户随时留意手机，推送的红包请在24小时内领取，如没领取，则视作自动弃权。<br>&nbsp;&nbsp;&nbsp;&nbsp;活动最高解释权归金象米所有。</div>
+	</div>
+	<!-- 第二页 -->
+	<div class="second">
+		<!-- 倒计时和计分栏 -->
+		<div class="top">
+			<div class="top_time">Time:<span>20</span></div>
+			<div class="top_score">
+				x<span class="top_score_no">0</span>
+			</div>
+			<div class="top_ele"><img src="img/elephant.png" onload="loadImage(this)"></div>
+		</div>
+		<!-- 米袋 -->
+		<div class="rice rice1"><img src="img/rice.png" onload="loadImage(this)"></div>
+		<div class="rice rice2"><img src="img/rice.png" onload="loadImage(this)"></div>
+		<div class="rice rice3"><img src="img/rice.png" onload="loadImage(this)"></div>
+		<div class="second_ele"><img src="img/elephant.png" onload="loadImage(this)"></div>
+		<div class="second_star"></div>
+	</div>
+	<!-- 第三页 -->
+	<div class="third">
+		<!-- 得分 -->
+		<div class="third_score">
+			<div class="third_score_ele"><img src="img/elephant.png" onload="loadImage(this)"></div>
+			<div class="third_score_no">x<span></span></div>
+		</div>
+		<!-- 奖励（新） -->
+		<div class="third_adw_new">
+			恭喜您获得了一个红包<br>点击打开<br>
+			<img src="img/packet_closed.jpg" class="third_packet">
+		</div>
+		<!-- 奖励 -->
+		<!-- <div class="third_adw"></div> -->
+	</div>
+	<!-- 红包页面 -->
+	<div class="packet_result">
+		<img src="" class="packet_new" id="packet_new">
+		<!-- 按钮组 -->
+		<div class="btn btn_r"><img src="img/btn_record.png" onload="loadImage(this)"></div>
+		<div class="btn btn_a"><img src="img/btn_again.png" onload="loadImage(this)"></div>
+		<div class="btn btn_sh"><img src="img/btn_share.png" onload="loadImage(this)"></div>
+	</div>
+	<!-- 分享蒙板 -->
+	<div class="share">
+		<div class="mask"><img src="img/toshare.png" class="toshare" onload="loadImage(this)"></div>
+	</div>
+	<!-- 第四页 -->
+	<div class="forth">
+		<div class="adward">
+			<div class="adward_title">得奖记录</div>
+			<div class="adward_list">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<div class="btn btn_a"><img src="img/btn_again.png" onload="loadImage(this)"></div>
+	</div>
+	<!--<script src="js/common.js"></script>-->
+	<script>
+		$(function(){
+			var still_load=0;	//判断是否有loading页面，0为有，1为无
+			var count=0;	//点中小象次数
+			var is_check_rules=0;	//记录是否查看规则
+			var is_click_ajax=0;	//记录是否点击红包ajax过
+			var shakeAudio = new Audio();
+			    shakeAudio.src = 'game.mp3';
+			var shake_options = {
+			    preload  : 'auto'
+			}
+			for(var key in shake_options){
+			    if(shake_options.hasOwnProperty(key) && (key in shakeAudio)){
+			        shakeAudio[key] = shake_options[key];
+			    }
+			}
+			$('body').on('touchmove', function (event) {
+			    event.preventDefault();
+			});
+			/*开始按钮点击事件*/
+			$(".btn_s").click(function(){
+				if(is_check_rules==0){
+					$(".rules").show();
+					is_check_rules=1;
+					return;
+				}
+				$(".logo").hide();
+				shakeAudio.play();
+				$(".first").hide();
+				$(".second").show();
+				game();
+				ele(500);
+				setInterval(function(){
+					ele(500);
+				},5000);
+			});
+			/*规则按钮点击事件*/
+			$(".btn_ru").click(function(){
+				$(".rules").show();
+				is_check_rules=1;
+			});
+			/*点击红包打开事件*/
+			$(".third_packet").click(function(){
+				is_click_ajax+=1;
+				if(is_click_ajax==1){
+					var a=$(this);
+					a.addClass("packet_big");
+					var ran_packet=parseInt(Math.random()*4+6);		//4为未中红包种类数，6为从6开始计数
+					if(count>0){
+						// $.post("{:U('is_prize')}",{},function(data){
+							// if(data['is_success']){
+								$(".packet_new").attr("src","img/packet_"+ran_packet+".png");
+								document.getElementById("packet_new").onload=function() {
+									setTimeout(function(){
+										a.removeClass("packet_big");
+										$(".third").hide();
+										$(".packet_result").show();
+										console.log(data['cash']);
+									},2000);
+								}
+							// }
+						//	else{
+						// 		alert(data['msg']);
+						// 		window.location.href="{:U('index')}";
+						// 	}
+						// },"json");
+					}
+					else {
+						$(".packet_new").attr("src","img/packet_"+ran_packet+".png");
+						document.getElementById("packet_new").onload=function() {
+							setTimeout(function(){
+								a.removeClass("packet_big");
+								$(".third").hide();
+								$(".packet_result").show();
+								console.log(ran_packet);
+							},2000);
+						}
+					}
+				}
+			});
+			/*分享按钮点击事件*/
+			$(".btn_sh").click(function(){
+				$(".share").show();
+			});
+			/*再来一次按钮点击事件*/
+			$(".btn_a").click(function(){
+				location.reload();
+				// window.location.href="{:U('index')}"+"&status=1";
+			});
+			/*获奖按钮点击事件*/
+			$(".btn_r").click(function(){
+				$(".packet_result").hide();
+				$(".forth").show();
+				// $.post("{:U('user_record')}",{},function(data){
+				// 	if(data['is_success']){
+				// 		if(data['status'] != 0){
+				// 			$(".adward_list span:nth-of-type(1)").text(data['time']);
+				// 			$(".adward_list span:nth-of-type(2)").text(data['cash']+"元红包");
+				// 		}	
+				// 	}else{
+				// 		alert(data['msg']);
+				// 		window.location.href="{:U('index')}";
+				// 	}
+				// },"json")
+			});
+			/*点击蒙板关闭事件*/
+			$(".mask,.rules_content").click(function(){
+				$(this).parent().hide();
+			});
+			/*点击小象加次数*/
+			$(".second_ele").click(function(){
+				var b=$(this);
+				var a=parseInt($(".top_score_no").text())+1;
+				$(".top_score_no").text(a);
+				$(".second_star").css({
+					"top":b.css("top"),
+					"left":b.css("left")
+				});
+				$(".second_star").addClass("tran");
+				setTimeout(function(){
+					$(".second_star").addClass("tonum");
+				},150);
+				setTimeout(function(){
+					$(".top_score_no").addClass("bigger");
+					$(".second_star").removeClass("tran");
+					$(".second_star").removeClass("tonum");
+				},750);
+				setTimeout(function(){
+					$(".top_score_no").removeClass("bigger");
+				},1250);
+				/*setTimeout为测试*/
+				// setTimeout(function(){
+				// 	still_load=1;
+				// 	if($(".abc").css("display")!="none"){
+				// 		$(".abc").hide();
+				// 		$(".third").show();
+				// 	}
+				// },3000);
+
+			});
+			/*游戏计时function*/
+			function game(){
+				var time=$(".top_time span");
+				var t=5;			//t为游戏时间
+				var a=setInterval(function(){
+					t=t-1;
+					time.text(t);
+					if(t<=0){
+						count=parseInt($(".top_score_no").text());
+						$(".third_score_no span").text(count);
+						// if(count==0){
+							// $(".third_adw").text("您的手气不太好哦，据说分享后会更容易中奖！");
+							$(".second").hide();
+							$(".logo").show();
+							$(".third").show();
+							clearInterval(a);
+							// return;
+						// }
+						// is_adward(count);
+						/*else{
+							$(".second").hide();
+							if(still_load==0){
+								$(".abc").css("background","rgba(0,0,0,0.3)");
+								$(".abc").show();
+							}
+							else{
+								$(".third").show();
+							}
+							clearInterval(a);	
+							return;
+						}*/
+					}
+				},1000);
+			}
+			/*金象的动画*/
+			function ele(speed){
+				/*获取window和小象宽高*/
+				var win=$(window);
+				var win_w=win.width();
+				var win_h=win.height();
+				var ele=$(".second_ele");
+				var ele_w=ele.width();
+				var ele_h=ele.height();
+				var maxleft=win_w-ele_w;
+				var maxtop=win_h-ele_h;
+				var eachtop=maxtop/5;
+				ele.animate({
+					left:maxleft+"px",
+					top:"+="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:0,
+					top:"+="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:maxleft+"px",
+					top:"+="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:0,
+					top:"+="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:maxleft+"px",
+					top:"+="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:0,
+					top:"-="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:maxleft+"px",
+					top:"-="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:0,
+					top:"-="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:maxleft+"px",
+					top:"-="+eachtop+"px"
+				},speed,"linear");
+				ele.animate({
+					left:0,
+					top:0
+				},speed,"linear");
+			}
+			/*判断是否中奖*/
+			function is_adward(e){
+				// var p5,p3,p2,p1;
+				if(e==0){
+					$(".third_adw").text("您的手气不太好哦，据说分享后会更容易中奖！");
+				}
+				else{
+					var a=parseInt(Math.random()*2000);			//生成随机数，2000为估计每天玩的人数
+					console.log(a);
+					if(a<=1000){									//当天红包的总数
+						// $.post("url",{},function(data){		//ajax出红包剩余数量
+							p5=1;
+							p3=2;
+							p2=3;
+							p1=4;
+						// });
+						var total=p1+p2+p3+p5;
+						if(total==0){		//如果剩余红包总数为0，则跳出函数
+							$(".third_adw").text("您的手气不太好哦，据说分享后会更容易中奖！");
+							return;
+						}
+						else{
+							var b=parseInt(Math.random()*total);
+							console.log("p5="+p5+",p3="+p3+",p2="+p2+",p1="+p1+",total="+total+",b="+b);
+							if(b<p5){
+								$(".third_adw").text("获5元红包").css({
+									"padding-bottom":"4rem"
+								});
+							}
+							else if(b>=p5&&b<(p5+p3)){
+								$(".third_adw").text("获3元红包").css({
+									"padding-bottom":"4rem"
+								});
+							}
+							else if(b>=(p5+p3)&&b<(p5+p3+p2)){
+								$(".third_adw").text("获2元红包").css({
+									"padding-bottom":"4rem"
+								});
+							}
+							else if(b>=(p5+p3+p2)&&b<(p5+p3+p2+p1)){
+								$(".third_adw").text("获1元红包").css({
+									"padding-bottom":"4rem"
+								});
+							}
+						}
+						
+					}
+					else{
+						$(".third_adw").text("您的手气不太好哦，据说分享后会更容易中奖！");
+					}
+				}
+			}
+
+		});
+	</script>
+
+	<!-- 微信相关 -->
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+	<script>
+		/* 注意：
+		* 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+		* 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+		* 3. 常见问题及完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+		* 开发中遇到问题详见文档“附录5-常见错误及解决办法”解决，如仍未能解决可通过以下渠道反馈：
+		* 邮箱地址：weixin-open@qq.com
+		* 邮件主题：【微信JS-SDK反馈】具体问题
+		* 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。*/
+	   
+		/*wx.config({
+			debug: false,
+			appId: '{$signPackage.appId}',
+			timestamp: {$signPackage.timestamp},
+			nonceStr: '{$signPackage.nonceStr}',
+			signature: '{$signPackage.signature}',
+			jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage']
+		});//所有要调用的 API 都要加到这个列表中
+		wx.ready(function () {
+			// 在这里调用 API
+			wx.onMenuShareAppMessage({    //分享给朋友的
+				title: '金象米大派红包！',//分享标题   //LKB   要改
+				desc: '金象米大派红包啦，大家快来参与吧！！',//分享描述
+				link: 'http://www.greatzone.cn/test/lefenqi/index.php?s=/addon/Jinxiangmi/Jinxiangmi/index.html',//分享链接
+				imgUrl: 'http://www.greatzone.cn/test/lefenqi/Addons/Jinxiangmi/View/default/Public/img/share.jpg',//分享图标
+				type: '', //分享类型,music、video或link，不填默认为link
+				dataUrl: '', //如果type是music或video，则要提供数据链接，默认为空
+				success: function(){
+					$.post("{:U('share_count')}",{},function(data){},"json");
+				},//用户确认分享后执行的回调函数
+				cancel: function(){}//用户取消分享后执行的回调函数
+			});
+			wx.onMenuShareTimeline({   //分享到朋友圈的
+				title: '金象米大派红包！', // 分享标题
+				link: 'http://www.greatzone.cn/test/lefenqi/index.php?s=/addon/Jinxiangmi/Jinxiangmi/index.html',//分享链接
+				imgUrl: 'http://www.greatzone.cn/test/lefenqi/Addons/Jinxiangmi/View/default/Public/img/share.jpg',//分享图标
+				success: function(){
+					$.post("{:U('share_count')}",{},function(data){},"json");
+				},//用户确认分享后执行的回调函数
+				cancel: function(){}//用户取消分享后执行的回调函数
+			});
+		});*/
+	 
+	</script>
+</body>
+</html>
